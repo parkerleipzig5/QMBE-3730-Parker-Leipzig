@@ -1,18 +1,6 @@
-USE parkerleipzig;
+CREATE DATABASE BITS;
 
-SHOW TABLES;
-
-CREATE TABLE students(age int, height float, city varchar (255));
-
-DESCRIBE TABLE students;
-
-INSERT INTO students ( age, height, city) VALUES ('20', '6.3', 'U.S');
-
-SELECT *
-FROM parkerleipzig.students;
-
-
-USE bits;
+USE BITS;
 
 CREATE TABLE Consultant (
     ConsltNum CHAR(2) PRIMARY KEY,
@@ -274,4 +262,4 @@ VALUES
 ;
 
 
-SHOW TABLES;
+
