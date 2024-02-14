@@ -300,4 +300,86 @@ INNER JOIN consultant ON client.consltnum=consultant.consltnum;
 
 SELECT a.clientnum, a.clientname, b.consltnum
 FROM client a #a refers to the client tables
-INNER JOIN consltant b ON a.consltnum=b.consltnum
+INNER JOIN consltant b ON a.consltnum=b.consltnum #b refers to the consultant table
+
+SELECT client.clientnum, client.clientname, consultant.consltnum
+FROM client
+LEFT JOIN consultant ON client.consltnum=consultant.consltnum;
+
+SELECT client.clientnum, client.clientname
+FROM client;
+
+SELECT COUNT(*)
+FROM client;
+SELECT COUNT(*)
+FROM consultant;
+
+SELECT client.clientnum, client.clientname, conslutant.consltnum
+FROM client
+RIGHT JOIN consultant ON client.consltnum=consultant.consltnum;
+
+SELECT client.clientnum, client.clientname, consultant.consltnum
+FROM client
+CROSS JOIN consultant ON client.consltnum=consultant.consltnum;
+
+# A different syntax
+SELECT client.clientnum, client.clientname, consultant.consltnum
+FROM client
+JOIN consultant
+USING (consltnum);
+
+SELECT w.ordernum, w.orderdate, c.clientnum, c.clientname,
+o.taskid, t.description, t.category, t.price
+FROM workorders w, client c, tasks t, orderline o
+WHERE c.clientnum = w.clientnum #1st join(workorders and client)
+AND w.ordernum = o.ordernum #2nd join(workorders and orderlines
+AND o.taskid = t.taskid #3 (orderline and task table)
+ORDER BY w.ordernum;
+
+# UNION is like append
+
+SELECT c.clientnum, c.clientname
+FROM client c
+WHERE consultnum = 19;
+
+SELECT c.clientnum, c.clientname
+FROM client c, workorders w
+WHERE c.clientnum = w.clientnum;
+
+SELECT c.clientnum, c.clientname
+FROM client c
+WHERE consltnum = 19
+UNION
+SELECT c.clientnum, c.clientname
+FROM client c, workorders w
+WHERE c.clientnum = w.clientnum;
+
+#Common Table Expression (CTE)
+#In SQL, CTE stands Common Table Expression
+#Temporary Result
+
+SELECT *
+FROM client;
+
+SELECT
+ clientname,
+ balance
+FROM
+ client
+WHERE
+
+
+WITH client_balances AS (
+SELECT clientnum, AVG(balance) AS average_balance
+FROM client c
+GROUP BY clientnum)
+SELECT w.clientnum, w.orderdate, c.average_balance
+FROM workorders w
+JOIN client_balances c
+ON w.clientnum = c.clientnum;
+
+SELECT clientnum, AVG(balance) AS average_balance
+FROM client c
+GROUP BY clientnum;
+
+SHOW TABLES;
